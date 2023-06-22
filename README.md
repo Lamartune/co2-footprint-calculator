@@ -1,7 +1,3 @@
-## License
-
-The CO2 Footprint Calculator plugin is licensed under the [MIT License](LICENSE).
-
 CO2 Footprint Calculator
 
 A simple WordPress plugin that calculates the CO2 footprint based on user input.
@@ -65,6 +61,6 @@ Contributing
 
 Contributions to the CO2 Footprint Calculator plugin are welcome. If you encounter any issues or have suggestions for improvements, please feel free to create an issue or submit a pull request on the GitHub repository.
 
-License
+## License
 
-This plugin is licensed under the MIT License.
+The CO2 Footprint Calculator plugin is licensed under the [MIT License](LICENSE).
