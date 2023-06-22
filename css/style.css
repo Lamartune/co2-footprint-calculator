@@ -1,0 +1,48 @@
+.co2-calculator {
+    background-color: #ffffff;
+    padding: 20px;
+}
+
+.co2-calculator h2 {
+    color: #05a557;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.co2-calculator form {
+    margin-bottom: 20px;
+}
+
+.co2-calculator .form-field {
+    margin-bottom: 10px;
+}
+
+.co2-calculator label {
+    display: block;
+    font-weight: bold;
+}
+
+.co2-calculator input[type="number"],
+.co2-calculator select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.co2-calculator input[type="submit"] {
+    background-color: #05a557;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.co2-calculator input[type="submit"]:hover {
+    background-color: #2dbf7b;
+}
+
+.co2-calculator .result {
+    margin-top: 20px;
+}
