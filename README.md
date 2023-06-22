@@ -1,7 +1,5 @@
 # CO2 Footprint Calculator
 
-![Banner](images/banner.jpg)
-
 The CO2 Footprint Calculator is a WordPress plugin that allows users to calculate their carbon dioxide (CO2) footprint based on various factors. By inputting their monthly electric bill, gas bill, oil bill, car miles driven, number of flights taken, and recycling habits, users can obtain an estimate of their CO2 footprint.
 
 ## Features
@@ -24,12 +22,6 @@ To add the CO2 Footprint Calculator to a page or post, use the following shortco
 
 This will display the calculator form on the frontend, allowing users to input their information and calculate their CO2 footprint.
 
-## Screenshots
-
-![Calculator Form](images/screenshot-1.png)
-
-![Result](images/screenshot-2.png)
-
 ## License
 
 The CO2 Footprint Calculator plugin is licensed under the [MIT License](LICENSE).
@@ -38,15 +30,7 @@ The CO2 Footprint Calculator plugin is licensed under the [MIT License](LICENSE)
 
 Contributions are welcome! If you have any suggestions, bug reports, or feature requests, please open an issue or submit a pull request.
 
-## Acknowledgements
-
-- Thanks to [jQuery](https://jquery.com/) for the JavaScript library used in this plugin.
-- The banner image was created by [Freepik](https://www.freepik.com) and is available on [Freepik](https://www.freepik.com/free-vector/ecology-concept-illustration_11173161.htm).
-
 ## Support
 
 If you encounter any issues or need assistance, please [open an issue](https://github.com/Lamartune/CO2-Footprint-Calculator/issues) on GitHub.
 
-## License
-
-The CO2 Footprint Calculator plugin is licensed under the [MIT License](LICENSE).
