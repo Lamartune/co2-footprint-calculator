@@ -10,7 +10,7 @@ The CO2 Footprint Calculator is a WordPress plugin that allows users to calculat
 
 ## Installation
 
-1. Download the latest version of the plugin from the [Releases](https://github.com/Lamartune/CO2-Footprint-Calculator/releases) page.
+1. Download the latest version of the plugin from the [Releases](https://github.com/Lamartune/co2-footprint-calculator/archive/refs/heads/main.zip) page.
 2. Upload the plugin folder to the `wp-content/plugins/` directory of your WordPress installation.
 3. Activate the plugin through the WordPress admin panel.
 
