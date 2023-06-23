@@ -64,26 +64,10 @@ function co2_calculator_page()
                     <option value="no">No</option>
                 </select>
             </div>
-            <input type="submit" name="calculate" value="Calculate">
+            <div class="form-field">
+                <button type="submit">Calculate CO2 Footprint</button>
+            </div>
         </form>
-        <div class="result">
-            <?php
-            if (isset($_POST['calculate']) && isset($_POST['electric_bill']) && isset($_POST['gas_bill']) && isset($_POST['oil_bill']) && isset($_POST['car_miles']) && isset($_POST['flights_short']) && isset($_POST['flights_long']) && isset($_POST['recycle_newspaper']) && isset($_POST['recycle_aluminum'])) {
-                $electricBill = $_POST['electric_bill'];
-                $gasBill = $_POST['gas_bill'];
-                $oilBill = $_POST['oil_bill'];
-                $carMiles = $_POST['car_miles'];
-                $flightsShort = $_POST['flights_short'];
-                $flightsLong = $_POST['flights_long'];
-                $recycleNewspaper = $_POST['recycle_newspaper'];
-                $recycleAluminum = $_POST['recycle_aluminum'];
-
-                $co2_footprint = calculate_co2($electricBill, $gasBill, $oilBill, $carMiles, $flightsShort, $flightsLong, $recycleNewspaper, $recycleAluminum);
-
-                echo '<p>CO2 Footprint: ' . $co2_footprint . ' kg</p>';
-            }
-            ?>
-        </div>
     </div>
 
     <?php
@@ -91,31 +75,58 @@ function co2_calculator_page()
 }
 add_shortcode('co2_calculator', 'co2_calculator_page');
 
-// CO2 hesaplama fonksiyonu
-function calculate_co2($electricBill, $gasBill, $oilBill, $carMiles, $flightsShort, $flightsLong, $recycleNewspaper, $recycleAluminum)
+// CO2 hesaplama işlemi
+function calculate_co2_footprint()
 {
-    // CO2 salınım oranları (kg CO2 birim başına)
-    $co2_per_electric_euro = 0.1; // Elektrik faturası başına CO2 salınımı (euro başına)
-    $co2_per_gas_euro = 0.2; // Gaz faturası başına CO2 salınımı (euro başına)
-    $co2_per_oil_euro = 0.3; // Yağ faturası başına CO2 salınımı (euro başına)
-    $co2_per_mile_car = 0.2; // Araba ile seyahat başına CO2 salınımı (mil başına)
-    $co2_per_flight_short = 0.15; // 4 saatten kısa uçuş başına CO2 salınımı
-    $co2_per_flight_long = 0.3; // 4 saatten uzun uçuş başına CO2 salınımı
-    $co2_recycle_newspaper = -0.05; // Gazete geri dönüşümü için azaltılan CO2 salınımı
-    $co2_recycle_aluminum = -0.1; // Alüminyum ve teneke kutuların geri dönüşümü için azaltılan CO2 salınımı
+    if (isset($_POST['action']) && $_POST['action'] === 'calculate_co2_footprint') {
+        $electricBill = $_POST['electric_bill'];
+        $gasBill = $_POST['gas_bill'];
+        $oilBill = $_POST['oil_bill'];
+        $carMiles = $_POST['car_miles'];
+        $flightsShort = $_POST['flights_short'];
+        $flightsLong = $_POST['flights_long'];
+        $recycleNewspaper = $_POST['recycle_newspaper'];
+        $recycleAluminum = $_POST['recycle_aluminum'];
 
-    // CO2 hesaplama
-    $co2_electric = $electricBill * $co2_per_electric_euro;
-    $co2_gas = $gasBill * $co2_per_gas_euro;
-    $co2_oil = $oilBill * $co2_per_oil_euro;
-    $co2_car = $carMiles * $co2_per_mile_car;
-    $co2_flights_short = $flightsShort * $co2_per_flight_short;
-    $co2_flights_long = $flightsLong * $co2_per_flight_long;
-    $co2_recycle_newspaper = $recycleNewspaper == 'yes' ? $co2_recycle_newspaper : 0;
-    $co2_recycle_aluminum = $recycleAluminum == 'yes' ? $co2_recycle_aluminum : 0;
+        $co2_per_electric_euro = 0.45;
+        $co2_per_gas_euro = 0.28;
+        $co2_per_oil_euro = 0.36;
+        $co2_per_mile_car = 0.41;
+        $co2_per_flight_short = 250;
+        $co2_per_flight_long = 3500;
+        $co2_recycle_newspaper = 25;
+        $co2_recycle_aluminum = 17;
 
-    $co2_footprint = $co2_electric + $co2_gas + $co2_oil + $co2_car + $co2_flights_short + $co2_flights_long + $co2_recycle_newspaper + $co2_recycle_aluminum;
+        $co2_electric = $electricBill * $co2_per_electric_euro;
+        $co2_gas = $gasBill * $co2_per_gas_euro;
+        $co2_oil = $oilBill * $co2_per_oil_euro;
+        $co2_car = $carMiles * $co2_per_mile_car;
+        $co2_flights_short = $flightsShort * $co2_per_flight_short;
+        $co2_flights_long = $flightsLong * $co2_per_flight_long;
+        $co2_recycle_newspaper = $recycleNewspaper == 'yes' ? $co2_recycle_newspaper : 0;
+        $co2_recycle_aluminum = $recycleAluminum == 'yes' ? $co2_recycle_aluminum : 0;
 
-    return $co2_footprint;
+        echo '<div class="co2-calculator-result">';
+        echo '<h3>CO2 Footprint Calculation Results:</h3>';
+        echo '<p>Electricity CO2 Emissions: ' . $co2_electric . ' kg</p>';
+        echo '<p>Gas CO2 Emissions: ' . $co2_gas . ' kg</p>';
+        echo '<p>Oil CO2 Emissions: ' . $co2_oil . ' kg</p>';
+        echo '<p>Car CO2 Emissions: ' . $co2_car . ' kg</p>';
+        echo '<p>Flights (Short) CO2 Emissions: ' . $co2_flights_short . ' kg</p>';
+        echo '<p>Flights (Long) CO2 Emissions: ' . $co2_flights_long . ' kg</p>';
+        echo '<p>Recycling (Newspaper) CO2 Emissions: ' . $co2_recycle_newspaper . ' kg</p>';
+        echo '<p>Recycling (Aluminum) CO2 Emissions: ' . $co2_recycle_aluminum . ' kg</p>';
+        echo '</div>';
+
+        echo '<script>';
+        echo 'var co2Data = {';
+        echo 'labels: ["Electricity", "Gas", "Oil", "Car", "Flights (Short)", "Flights (Long)", "Recycling (Newspaper)", "Recycling (Aluminum)"],';
+        echo 'data: [' . $co2_electric . ', ' . $co2_gas . ', ' . $co2_oil . ', ' . $co2_car . ', ' . $co2_flights_short . ', ' . $co2_flights_long . ', ' . $co2_recycle_newspaper . ', ' . $co2_recycle_aluminum . ']';
+        echo '};';
+        echo 'drawChart(co2Data);';
+        echo '</script>';
+    }
 }
-?>
+
+
+add_action('init', 'calculate_co2_footprint');

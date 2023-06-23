@@ -46,3 +46,10 @@
 .co2-calculator .result {
     margin-top: 20px;
 }
+
+
+    #co2_chart {
+        width: 400px;
+        height: 300px;
+    }
+
