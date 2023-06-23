@@ -43,13 +43,37 @@
     background-color: #2dbf7b;
 }
 
-.co2-calculator .result {
+.co2-calculator-result {
     margin-top: 20px;
 }
 
+#co2_chart {
+    width: 400px;
+    height: 300px;
+}
 
-    #co2_chart {
-        width: 400px;
-        height: 300px;
-    }
+.co2-calculator-result {
+    margin-top: 20px;
+    background-color: #f2f2f2;
+    padding: 10px;
+    border-radius: 4px;
+}
 
+.co2-calculator-result h3 {
+    color: #05a557;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.co2-calculator-result p {
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+.co2-calculator-result p:first-child {
+    margin-top: 0;
+}
+
+.co2-calculator-result p:last-child {
+    margin-bottom: 0;
+}

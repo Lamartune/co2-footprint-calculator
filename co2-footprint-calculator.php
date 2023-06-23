@@ -2,7 +2,7 @@
 /*
 Plugin Name: CO2 Footprint Calculator
 Description: Calculates the CO2 footprint based on user input.
-Version: 2.0
+Version: 4.0
 Author: github.com/Lamartune
 */
 
@@ -103,8 +103,8 @@ function calculate_co2_footprint()
         $co2_car = $carMiles * $co2_per_mile_car;
         $co2_flights_short = $flightsShort * $co2_per_flight_short;
         $co2_flights_long = $flightsLong * $co2_per_flight_long;
-        $co2_recycle_newspaper = $recycleNewspaper == 'yes' ? $co2_recycle_newspaper : 0;
-        $co2_recycle_aluminum = $recycleAluminum == 'yes' ? $co2_recycle_aluminum : 0;
+        $co2_recycle_newspaper = $recycleNewspaper == 'no' ? $co2_recycle_newspaper : 0;
+        $co2_recycle_aluminum = $recycleAluminum == 'no' ? $co2_recycle_aluminum : 0;
 
         echo '<div class="co2-calculator-result">';
         echo '<h3>CO2 Footprint Calculation Results:</h3>';
@@ -127,6 +127,41 @@ function calculate_co2_footprint()
         echo '</script>';
     }
 }
+function calculate_average_co2_footprint() {
+    $electricBill = isset($_POST['electric_bill']) ? $_POST['electric_bill'] : 0;
+    $gasBill = isset($_POST['gas_bill']) ? $_POST['gas_bill'] : 0;
+    $oilBill = isset($_POST['oil_bill']) ? $_POST['oil_bill'] : 0;
+    $carMiles = isset($_POST['car_miles']) ? $_POST['car_miles'] : 0;
+    $flightsShort = isset($_POST['flights_short']) ? $_POST['flights_short'] : 0;
+    $flightsLong = isset($_POST['flights_long']) ? $_POST['flights_long'] : 0;
+    $recycleNewspaper = isset($_POST['recycle_newspaper']) ? $_POST['recycle_newspaper'] : 'no';
+    $recycleAluminum = isset($_POST['recycle_aluminum']) ? $_POST['recycle_aluminum'] : 'no';
 
+    $co2_per_electric_euro = 0.45;
+    $co2_per_gas_euro = 0.28;
+    $co2_per_oil_euro = 0.36;
+    $co2_per_mile_car = 0.41;
+    $co2_per_flight_short = 250;
+    $co2_per_flight_long = 3500;
+    $co2_recycle_newspaper = 25;
+    $co2_recycle_aluminum = 17;
 
+    $co2_electric = $electricBill * $co2_per_electric_euro;
+    $co2_gas = $gasBill * $co2_per_gas_euro;
+    $co2_oil = $oilBill * $co2_per_oil_euro;
+    $co2_car = $carMiles * $co2_per_mile_car;
+    $co2_flights_short = $flightsShort * $co2_per_flight_short;
+    $co2_flights_long = $flightsLong * $co2_per_flight_long;
+    $co2_recycle_newspaper = $recycleNewspaper == 'yes' ? $co2_recycle_newspaper : 0;
+    $co2_recycle_aluminum = $recycleAluminum == 'yes' ? $co2_recycle_aluminum : 0;
+
+    $total_co2 = $co2_electric + $co2_gas + $co2_oil + $co2_car + $co2_flights_short + $co2_flights_long + $co2_recycle_newspaper + $co2_recycle_aluminum;
+    $average_co2 = $total_co2 / 8;
+
+    echo '<div class="co2-calculator-result">';
+    echo '<h3>Average CO2 Footprint:</h3>';
+    echo '<p>' . $average_co2 . ' kg</p>';
+    echo '</div>';
+}
+add_action('init', 'calculate_average_co2_footprint');
 add_action('init', 'calculate_co2_footprint');
